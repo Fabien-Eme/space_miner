@@ -77,19 +77,19 @@ class ProductionController extends Component with HasGameReference<FGJ2025>, Not
         ressourceType = RessourceType.rocketPart;
 
         while (reducer < game.buildingController.buildingBuilt[BuildingType.rocketPad]!) {
-          if (game.ressourceController.mplate < production * 5) {
+          if (game.ressourceController.mplate < production * 4) {
             reducer++;
             production =
                 (game.buildingController.buildingBuilt[BuildingType.rocketPad]! - reducer) *
                 game.buildingController.rocketPadProduction;
           } else {
-            game.ressourceController.removeRessources(ressourceType: RessourceType.mplate, amount: production * 5);
+            game.ressourceController.removeRessources(ressourceType: RessourceType.mplate, amount: production * 4);
             game.ressourceController.addRessources(ressourceType: ressourceType, amount: production);
 
             levelWorld.addProductionNotification(
               ressourceTypes: [ressourceType, RessourceType.mplate],
               buildingType: buildingType,
-              amounts: [production.truncate(), -(production * 5).truncate()],
+              amounts: [production.truncate(), -(production * 4).truncate()],
             );
 
             return;
@@ -110,19 +110,19 @@ class ProductionController extends Component with HasGameReference<FGJ2025>, Not
         ressourceType = RessourceType.bullet;
 
         while (reducer < game.buildingController.buildingBuilt[BuildingType.armory]!) {
-          if (game.ressourceController.mplate < production * 2) {
+          if (game.ressourceController.mplate < production) {
             reducer++;
             production =
                 (game.buildingController.buildingBuilt[BuildingType.armory]! - reducer) *
                 game.buildingController.armoryProduction;
           } else {
-            game.ressourceController.removeRessources(ressourceType: RessourceType.mplate, amount: production * 2);
+            game.ressourceController.removeRessources(ressourceType: RessourceType.mplate, amount: production);
             game.ressourceController.addRessources(ressourceType: ressourceType, amount: production);
 
             levelWorld.addProductionNotification(
               ressourceTypes: [ressourceType, RessourceType.mplate],
               buildingType: buildingType,
-              amounts: [production.truncate(), -(production * 2).truncate()],
+              amounts: [production.truncate(), -(production).truncate()],
             );
 
             return;

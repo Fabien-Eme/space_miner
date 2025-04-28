@@ -11,7 +11,7 @@ import '../game.dart';
 class Miner extends SpriteAnimationComponent with HasGameReference<FGJ2025> {
   Miner({required super.position});
 
-  double speed = 0.75;
+  double speed = 0.8;
 
   late final ComponentsNotifier<ProductionController> productionControllerNotifier;
   late final VoidCallback productionControllerListener;

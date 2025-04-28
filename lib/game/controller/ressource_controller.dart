@@ -13,6 +13,8 @@ class RessourceController extends Component with HasGameReference<FGJ2025>, Noti
 
   bool isEnnemyUnlocked = false;
 
+  Map<int, int> ennemyWaveLaunched = {1: 5, 2: 10, 3: 15, 4: 20, 5: 30, 6: 40, 7: 50, 8: 70, 9: 90, 10: 50};
+
   void addRessources({required RessourceType ressourceType, required double amount}) {
     switch (ressourceType) {
       case RessourceType.ore:
@@ -32,18 +34,15 @@ class RessourceController extends Component with HasGameReference<FGJ2025>, Noti
         break;
       case RessourceType.rocketPart:
         rocketPart += amount;
-        if (rocketPart >= 10 && !isEnnemyUnlocked) {
-          isEnnemyUnlocked = true;
-        }
-        if (rocketPart % 5 == 0 && isEnnemyUnlocked) {
-          if (rocketPart == 10) {
-            game.combatController.addEnnemy(amount: 5);
-          } else {
-            if (rocketPart < 85) {
-              game.combatController.addEnnemy(amount: rocketPart.toInt());
-            } else {
-              game.combatController.addEnnemy(amount: rocketPart.toInt() * 2);
-            }
+        if (rocketPart >= 10) {
+          if (!isEnnemyUnlocked) {
+            isEnnemyUnlocked = true;
+          }
+
+          int ennemyWave = (rocketPart / 10).truncate();
+          if (ennemyWaveLaunched[ennemyWave] != null && ennemyWaveLaunched[ennemyWave]! != 0) {
+            game.combatController.addEnnemy(amount: ennemyWaveLaunched[ennemyWave]!);
+            ennemyWaveLaunched[ennemyWave] = 0;
           }
         }
         break;

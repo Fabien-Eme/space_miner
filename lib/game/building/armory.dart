@@ -11,7 +11,7 @@ import '../game.dart';
 class Armory extends SpriteAnimationComponent with HasGameReference<FGJ2025> {
   Armory({required super.position});
 
-  double speed = 0.3;
+  double speed = 0.4;
 
   late final ComponentsNotifier<ProductionController> productionControllerNotifier;
   late final VoidCallback productionControllerListener;

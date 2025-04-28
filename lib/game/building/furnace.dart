@@ -11,7 +11,7 @@ import '../game.dart';
 class Furnace extends SpriteAnimationComponent with HasGameReference<FGJ2025> {
   Furnace({required super.position});
 
-  double speed = 0.3;
+  double speed = 0.4;
 
   late final ComponentsNotifier<ProductionController> productionControllerNotifier;
   late final VoidCallback productionControllerListener;
